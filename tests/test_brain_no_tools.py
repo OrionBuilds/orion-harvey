@@ -76,7 +76,7 @@ async def test_claude_child_gets_an_allowlist_environment_not_the_secrets(state,
     env = captured["env"]
     assert env is not None, "child must get an explicit env, not inherit os.environ"
     assert not (set(secrets) & set(env))
-    assert env["PATH"] and env["HOME"]  # it still has to find its login
+    assert env["PATH"] and (env.get("HOME") or env.get("USERPROFILE"))  # it still has to find its login
     assert env["CLAUDE_CONFIG_DIR"] == "/home/x/.claude" and env["LC_ALL"] == "C.UTF-8"
     cmd = captured["cmd"]
     assert cmd[cmd.index("--setting-sources") + 1] == "project,local"

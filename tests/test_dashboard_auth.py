@@ -1,5 +1,6 @@
 """The dashboard can rewrite .env and start/stop Harvey, so it must not be open
 to any web page or local process that can reach 127.0.0.1."""
+import os
 
 import stat
 
@@ -111,7 +112,7 @@ def test_a_token_is_generated_once_with_owner_only_permissions(monkeypatch, tmp_
     assert len(first) >= 32
     assert dash.get_api_token() == first                      # stable across calls
     mode = stat.S_IMODE((tmp_path / "data" / "dashboard_token").stat().st_mode)
-    assert mode == 0o600
+    assert os.name == "nt" or mode == 0o600  # Windows has no POSIX permission bits
 
 
 def test_auth_can_only_be_disabled_explicitly(monkeypatch):

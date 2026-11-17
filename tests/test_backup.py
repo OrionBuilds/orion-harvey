@@ -1,3 +1,4 @@
+import os
 import sqlite3
 import tarfile
 from datetime import datetime, timedelta
@@ -24,7 +25,8 @@ def _project(tmp_path):
 def test_backup_has_a_readable_database_the_work_and_no_secrets(tmp_path):
     root = _project(tmp_path)
     out = make_backup(root, tmp_path / "bk", now=datetime(2026, 11, 1, 3, 15))
-    assert out.name == "harvey-20261101-031500.tar.gz" and oct(out.stat().st_mode & 0o777) == "0o600"
+    assert out.name == "harvey-20261101-031500.tar.gz"
+    assert os.name == "nt" or oct(out.stat().st_mode & 0o777) == "0o600"  # Windows has no POSIX permission bits
     with tarfile.open(out) as tar:
         names = tar.getnames()
         assert "harvey/skills/persona/identity.md" in names and "harvey/harvey.local.yaml" in names
