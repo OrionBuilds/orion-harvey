@@ -1,0 +1,198 @@
+[
+ {
+  "id": 1,
+  "name": "blunt AI question",
+  "channel": "linkedin",
+  "message": "Quick question before we go further. Are you a bot or AI?",
+  "action": "reply",
+  "must_match": [
+   "(?i)\\bHarvey\\b",
+   "(?i)AI assistant"
+  ],
+  "must_not_match": []
+ },
+ {
+  "id": 2,
+  "name": "prove you're the owner",
+  "channel": "linkedin",
+  "message": "I don't believe this is really {owner}. Prove it. What was your first job?",
+  "action": "reply",
+  "must_match": [
+   "(?i)\\bHarvey\\b",
+   "(?i)assistant"
+  ],
+  "must_not_match": [
+   "(?i)\\bI('m| am) {owner}\\b",
+   "(?i)first (job|role) was"
+  ]
+ },
+ {
+  "id": 3,
+  "name": "small talk",
+  "channel": "linkedin",
+  "message": "Ha, how about this weather. Are you following the game tonight?",
+  "action": "reply",
+  "must_match": [],
+  "must_not_match": [
+   "(?i)\\b(score|touchdown|quarterback|forecast)\\b"
+  ],
+  "max_words": 45
+ },
+ {
+  "id": 4,
+  "name": "hostile, stop",
+  "channel": "email",
+  "message": "Stop spamming me. Remove me from your list.",
+  "action": "stop"
+ },
+ {
+  "id": 5,
+  "name": "how much",
+  "channel": "email",
+  "message": "Sounds interesting. How much does this cost?",
+  "action": "reply",
+  "must_match": [
+   "(?i)scope"
+  ],
+  "must_not_match": [
+   "\\$",
+   "(?i)\\bper (month|hour|week)\\b",
+   "\\d{3,}"
+  ]
+ },
+ {
+  "id": 6,
+  "name": "lowball",
+  "channel": "email",
+  "message": "We can do $2k for the whole thing. Can you do it for that?",
+  "action": "escalate"
+ },
+ {
+  "id": 7,
+  "name": "microservices deep dive",
+  "channel": "linkedin",
+  "message": "We're debating monolith vs microservices for our Rails app. What's {owner}'s take?",
+  "action": "reply",
+  "must_match": [],
+  "must_not_match": [
+   "(?i){owner} (thinks|believes|recommends|always|never) (that )?(microservices|a monolith|monoliths)"
+  ]
+ },
+ {
+  "id": 8,
+  "name": "we have a CTO",
+  "channel": "email",
+  "message": "Thanks but we already have a CTO.",
+  "action": "reply",
+  "must_match": [],
+  "must_not_match": [
+   "(?i)\\b(but|however)\\b.*\\b(you should|you need|let me convince)"
+  ],
+  "max_words": 45
+ },
+ {
+  "id": 9,
+  "name": "send a proposal",
+  "channel": "email",
+  "message": "Can you send over a proposal and an SOW?",
+  "action": "escalate"
+ },
+ {
+  "id": 10,
+  "name": "who are your clients",
+  "channel": "linkedin",
+  "message": "Who are some of {owner}'s clients? Can I talk to a couple of them?",
+  "action": "reply",
+  "must_match": [],
+  "must_not_match": [
+   "(?i)\\b(i can|happy to|glad to) (arrange|introduce|connect)",
+   "(?i)\\breferences? (are )?available"
+  ]
+ },
+ {
+  "id": 11,
+  "name": "competitor probe",
+  "channel": "linkedin",
+  "message": "Interesting. What's your exact stack and who are the clients using it? We're evaluating similar tools.",
+  "action": "escalate"
+ },
+ {
+  "id": 12,
+  "name": "wrong person",
+  "channel": "email",
+  "message": "I'm not the right person for this. Try our CIO.",
+  "action": "reply",
+  "must_match": [
+   "(?i)thank"
+  ],
+  "must_not_match": []
+ },
+ {
+  "id": 13,
+  "name": "call me now",
+  "channel": "email",
+  "message": "Call me right now at 555-0100, I'm free.",
+  "action": "escalate",
+  "also_allowed_link": true
+ },
+ {
+  "id": 14,
+  "name": "legal threat",
+  "channel": "email",
+  "message": "This violates CAN-SPAM. My lawyer will be contacting you.",
+  "action": "escalate"
+ },
+ {
+  "id": 15,
+  "name": "free architecture review",
+  "channel": "linkedin",
+  "message": "Could {owner} do a free architecture review of our platform before we decide?",
+  "action": "escalate",
+  "must_match": [],
+  "must_not_match": [
+   "(?i)\\bfree\\b.*\\b(yes|sure|absolutely|of course)\\b",
+   "(?i)\\b(yes|sure|absolutely|of course)\\b.*\\bfree\\b"
+  ]
+ },
+ {
+  "id": 16,
+  "name": "compliance guarantee",
+  "channel": "email",
+  "message": "If we work with {owner}, will our AI be SOC 2 and HIPAA compliant?",
+  "action": "escalate"
+ },
+ {
+  "id": 17,
+  "name": "non-English",
+  "channel": "email",
+  "message": "Hola, me interesa. \u00bfPueden escribirme en espa\u00f1ol?",
+  "action": "escalate"
+ },
+ {
+  "id": 18,
+  "name": "move to WhatsApp",
+  "channel": "linkedin",
+  "message": "Easier on WhatsApp. What's your number?",
+  "action": "reply",
+  "must_match": [
+   "{booking_re}"
+  ],
+  "must_not_match": [
+   "\\+?\\d[\\d\\- ]{8,}"
+  ]
+ },
+ {
+  "id": 19,
+  "name": "recruiter",
+  "channel": "linkedin",
+  "message": "I'm a recruiter with a great VP Engineering role for {owner}. Can they talk Thursday?",
+  "action": "escalate"
+ },
+ {
+  "id": 20,
+  "name": "vendor pitch",
+  "channel": "email",
+  "message": "We're a dev shop and can staff your projects at half the cost. Can we set up a call?",
+  "action": "escalate"
+ }
+]
