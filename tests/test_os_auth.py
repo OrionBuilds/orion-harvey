@@ -35,7 +35,7 @@ def test_password_login_stores_only_the_refresh_token(tmp_path):
     assert saved["refresh_token"] == "r1" and "pw" not in auth.session_file.read_text()
     if os.name != "nt":  # Windows has no POSIX permission bits
         assert oct(auth.session_file.stat().st_mode & 0o777) == "0o600"
-    assert oct(auth.session_file.parent.stat().st_mode & 0o777) == "0o700"
+        assert oct(auth.session_file.parent.stat().st_mode & 0o777) == "0o700"
 
 
 def test_wrong_identity_is_refused_and_nothing_stored(tmp_path):
