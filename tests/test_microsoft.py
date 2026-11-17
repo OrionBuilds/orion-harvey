@@ -95,7 +95,8 @@ def test_a_rejected_refresh_token_asks_for_a_new_login(tmp_path):
 def test_the_token_file_is_owner_only_and_features_follow_granted_scopes(tmp_path):
     auth = make_auth(tmp_path)
     seed(auth, scope="Mail.ReadWrite Mail.Send User.Read")
-    assert stat.S_IMODE(os.stat(auth.token_file).st_mode) == 0o600
+    if os.name != "nt":  # Windows has no POSIX permission bits
+        assert stat.S_IMODE(os.stat(auth.token_file).st_mode) == 0o600
     assert auth.has_feature("mail") and not auth.has_feature("calendar") and not auth.has_feature("todo")
     assert auth.logout() and not auth.is_authorized() and not auth.logout()
 
